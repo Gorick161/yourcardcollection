@@ -1,17 +1,32 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+@extends('layouts.app')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
+@section('title', 'Dashboard')
+
+@section('content')
+<div class="min-h-screen bg-gray-900 text-white">
+
+    <!-- Content -->
+    <main class="p-6">
+        <h1 class="text-3xl font-bold text-cyan-400 mb-6">Hallo Dashboard</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-gray-800 p-4 rounded-lg shadow-lg">
+                <h2 class="text-xl font-semibold mb-2">Deine Sammlung</h2>
+                <p>Hier kannst du deine Karten verwalten und neue hinzufügen.</p>
+                <a href="{{ route('cards.create') }}" class="inline-block mt-3 px-4 py-2 bg-cyan-500 hover:bg-cyan-600 rounded text-white">Karte hinzufügen</a>
+            </div>
+
+            <div class="bg-gray-800 p-4 rounded-lg shadow-lg">
+                <h2 class="text-xl font-semibold mb-2">Statistiken</h2>
+                <p>Bald verfügbar: Ein Überblick über deine Sammlung.</p>
+            </div>
+
+            <div class="bg-gray-800 p-4 rounded-lg shadow-lg">
+                <h2 class="text-xl font-semibold mb-2">Profil</h2>
+                <p>Hier kannst du deine Benutzerdaten bearbeiten.</p>
+                <a href="{{ route('profile.edit') }}" class="inline-block mt-3 px-4 py-2 bg-cyan-500 hover:bg-cyan-600 rounded text-white">Profil bearbeiten</a>
             </div>
         </div>
-    </div>
-</x-app-layout>
+    </main>
+</div>
+@endsection
