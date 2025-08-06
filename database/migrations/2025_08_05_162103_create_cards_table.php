@@ -15,8 +15,8 @@ return new class extends Migration
         $table->id();
         $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Zuordnung zum eingeloggten Nutzer
         $table->string('name');                  // z. B. Glurak EX
-        $table->string('set')->nullable();       // z. B. sv2a
-        $table->string('set_number')->nullable();// z. B. 201/165
+        $table->string('set')->nullable();       // z. B. 151
+        $table->string('set_number')->nullable();// z. B. sv2a 201/165
         $table->string('rarity');                // AR, SR, SAR
         $table->string('card_type')->nullable(); // Pokémon, Trainer, Energie
         $table->string('language')->default('JPN');
