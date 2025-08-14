@@ -3,7 +3,7 @@
 @section('title', 'Meine Kartensammlung')
 
 @section('content')
-    <div class="max-w-6xl mx-auto mt-8 px-4">
+    <div class="max-w-7xl mx-auto mt-8 px-4">
         <h2 class="text-2xl font-bold text-cyan-400 mb-6 text-center">Deine Kartensammlung</h2>
 
         @if (session('success'))
@@ -14,7 +14,7 @@
 
         <div class="text-right mb-6">
             <a href="{{ route('cards.create') }}"
-                class="bg-cyan-500 hover:bg-cyan-600 text-white font-semibold px-4 py-2 rounded shadow">
+               class="bg-cyan-500 hover:bg-cyan-600 text-white font-semibold px-4 py-2 rounded shadow">
                 + Neue Karte
             </a>
         </div>
@@ -22,9 +22,9 @@
         @if ($cards->count() > 0)
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 @foreach ($cards as $card)
-                    <div class="bg-gray-800 bg-opacity-80 text-white rounded-lg p-4 shadow-lg">
+                    <div class="bg-gray-800 text-white rounded-xl p-4 shadow-lg border border-gray-700 hover:shadow-xl transition duration-200">
                         @if ($card->image_url)
-                            <img src="{{ $card->image_url }}" alt="{{ $card->name }}" class="w-full h-auto rounded mb-4">
+                            <img src="{{ $card->image_url }}" alt="{{ $card->name }}" class="w-full h-48 object-contain rounded mb-4 bg-gray-900">
                         @endif
 
                         <h3 class="text-lg font-bold text-cyan-400 mb-2">{{ $card->name }}</h3>

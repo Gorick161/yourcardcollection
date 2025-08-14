@@ -17,9 +17,11 @@
             </div>
 
             <div class="bg-gray-800 p-4 rounded-lg shadow-lg">
-                <h2 class="text-xl font-semibold mb-2">Statistiken</h2>
-                <p>Bald verfügbar: Ein Überblick über deine Sammlung.</p>
+                <h2 class="text-xl font-semibold mb-2"> Sammlung</h2>
+                <p> Ein Überblick über deine Sammlung.</p>
+                <a href="{{ route('cards.index') }}" class="inline-block mt-3 px-4 py-2 bg-cyan-500 hover:bg-cyan-600 rounded text-white">Kartensammlung ansehen</a>
             </div>
+
 
             <div class="bg-gray-800 p-4 rounded-lg shadow-lg">
                 <h2 class="text-xl font-semibold mb-2">Profil</h2>

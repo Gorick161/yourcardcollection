@@ -1,53 +1,43 @@
 @extends('layouts.app')
 
+@section('title', 'Meine Kartensammlung')
+
 @section('content')
-    <div class="max-w-4xl mx-auto mt-8 p-4 bg-white shadow rounded">
-        <h2 class="text-xl font-semibold mb-4">Deine Kartensammlung</h2>
+    <div class="max-w-7xl mx-auto mt-8 px-4">
+        <h2 class="text-2xl font-bold text-cyan-400 mb-6 text-center">Deine Kartensammlung</h2>
 
         @if (session('success'))
-            <div class="mb-4 text-green-600">
+            <div class="mb-6 bg-green-700 text-white px-4 py-2 rounded shadow">
                 {{ session('success') }}
             </div>
         @endif
 
-        <a href="{{ route('cards.create') }}"
-            class="inline-block mb-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-            + Neue Karte
-        </a>
+        <div class="text-right mb-6">
+            <a href="{{ route('cards.create') }}"
+               class="bg-cyan-500 hover:bg-cyan-600 text-white font-semibold px-4 py-2 rounded shadow">
+                + Neue Karte
+            </a>
+        </div>
 
         @if ($cards->count() > 0)
-            <table class="w-full text-left table-auto">
-                <thead class="bg-gray-100">
-                    <tr>
-                        <th class="px-2 py-1">Name</th>
-                        <th class="px-2 py-1">Set</th>
-                        <th class="px-2 py-1">Nummer</th>
-                        <th class="px-2 py-1">Seltenheit</th>
-                        <th class="px-2 py-1">Sprache</th>
-                        <th class="px-2 py-1">Preis</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($cards as $card)
-                        <div class="bg-white bg-opacity-10 p-4 rounded-lg shadow-lg mb-4 text-white">
-                            <div class="flex items-center space-x-4">
-                                @if ($card->image_url)
-                                    <img src="{{ $card->image_url }}" alt="{{ $card->name }}" class="w-20 h-auto rounded">
-                                @endif
-                                <div>
-                                    <h3 class="text-xl font-bold">{{ $card->name }}</h3>
-                                    <p>Set: {{ $card->set_name ?? 'Unbekannt' }}</p>
-                                    <p>Typ: {{ $card->type ?? 'Unbekannt' }}</p>
-                                    <p>Seltenheit: {{ $card->rarity ?? 'Unbekannt' }}</p>
-                                    <p>Zustand: {{ $card->condition ?? 'N/A' }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </tbody>
-            </table>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                @foreach ($cards as $card)
+                    <div class="bg-gray-800 text-white rounded-lg p-4 shadow-lg border border-gray-700 hover:shadow-xl transition duration-200">
+                        @if ($card->image_url)
+                            <img src="{{ $card->image_url }}" alt="{{ $card->name }}" class="w-full h-auto rounded mb-4">
+                        @endif
+                        <h3 class="text-lg font-bold text-cyan-400 mb-2">{{ $card->name }}</h3>
+                        <p><span class="font-semibold">Set:</span> {{ $card->set_name ?? $card->set ?? 'Unbekannt' }}</p>
+                        <p><span class="font-semibold">Typ:</span> {{ $card->type ?? $card->card_type ?? 'Unbekannt' }}</p>
+                        <p><span class="font-semibold">Seltenheit:</span> {{ $card->rarity ?? 'Unbekannt' }}</p>
+                        <p><span class="font-semibold">Sprache:</span> {{ $card->language ?? 'N/A' }}</p>
+                        <p><span class="font-semibold">Zustand:</span> {{ $card->condition ?? 'N/A' }}</p>
+                        <p><span class="font-semibold">Preis:</span> {{ $card->price ? number_format($card->price, 2) . ' €' : 'N/A' }}</p>
+                    </div>
+                @endforeach
+            </div>
         @else
-            <p>Du hast noch keine Karten gespeichert.</p>
+            <p class="text-white text-center">Du hast noch keine Karten gespeichert.</p>
         @endif
     </div>
 @endsection
