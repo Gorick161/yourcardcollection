@@ -33,6 +33,10 @@
                         <p><span class="font-semibold">Sprache:</span> {{ $card->language ?? 'N/A' }}</p>
                         <p><span class="font-semibold">Zustand:</span> {{ $card->condition ?? 'N/A' }}</p>
                         <p><span class="font-semibold">Preis:</span> {{ $card->price ? number_format($card->price, 2) . ' €' : 'N/A' }}</p>
+                        @if ($card->image_path)
+                            <img src="{{ asset('storage/' . $card->image_path) }}" alt="{{ $card->name }}"
+                             class="w-full h-300 object-cover mb-4 rounded shadow">
+                        @endif
                     </div>
                 @endforeach
             </div>

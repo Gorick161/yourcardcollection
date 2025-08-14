@@ -89,6 +89,8 @@
             </div>
         </div>
 
+        
+
         <!-- Notizen -->
         <div>
             <label for="notes" class="block text-sm font-medium text-white">Bemerkungen</label>
@@ -96,12 +98,16 @@
                 class="mt-1 block w-full rounded-md bg-gray-700 border border-gray-600 focus:border-cyan-500 focus:ring-cyan-500 text-white">{{ old('notes') }}</textarea>
         </div>
 
-        <!-- Button -->
-        <div class="text-right">
-            <button type="submit"
-                class="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-2 rounded-md font-semibold transition">
-                Karte speichern
-            </button>
+         <div class="mb-4">
+        <label for="image" class="block text-sm font-medium text-gray-300">Bild hochladen (optional):</label>
+        <input type="file" name="image" id="image"
+               class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-cyan-500">
+    </div>
+
+    <button type="submit"
+            class="bg-cyan-500 hover:bg-cyan-600 text-white font-semibold px-4 py-2 rounded">
+        Karte speichern
+    </button>
         </div>
     </form>
 </div>

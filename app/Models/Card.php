@@ -10,14 +10,9 @@ class Card extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
-        'name',
-        'card_id',
-        'image_url',
-        'rarity',
-        'type',
-        'set_name',
-    ];
+    'name', 'set', 'set_number', 'rarity', 'card_type',
+    'language', 'condition', 'price', 'notes', 'user_id', 'image_path'
+];
 
     // Relation to User the card belongs to
     public function user()

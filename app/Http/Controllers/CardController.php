@@ -31,12 +31,18 @@ class CardController extends Controller
             'condition' => 'nullable|string|max:50',
             'price' => 'nullable|numeric|min:0',
             'notes' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
         ]);
 
         $validated['user_id'] = Auth::id();
 
-        Card::create($validated);
-
-        return redirect()->route('cards.index')->with('success', 'Karte erfolgreich hinzugefügt.');
+    if ($request->hasFile('image')) {
+        $path = $request->file('image')->store('cards', 'public');
+        $validated['image_path'] = $path;
     }
+
+    Card::create($validated);
+
+    return redirect()->route('cards.index')->with('success', 'Karte erfolgreich hinzugefügt.');
+}
 }
