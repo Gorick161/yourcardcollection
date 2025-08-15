@@ -3,7 +3,7 @@
 @section('title', 'Neue Karte hinzufügen')
 
 @section('content')
-<div class="max-w-4xl mx-auto mt-10 bg-gray-800 p-8 rounded-lg shadow-lg">
+<div class="max-w-3xl mx-auto mt-10 bg-gray-800 bg-opacity-90 p-8 rounded-lg shadow-lg">
     <h2 class="text-2xl font-bold text-cyan-400 mb-6 text-center">Neue Karte hinzufügen</h2>
 
     @if ($errors->any())
@@ -16,98 +16,56 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ route('cards.store') }}" class="space-y-6">
+    <form method="POST" action="{{ route('cards.store') }}" enctype="multipart/form-data" class="space-y-4">
         @csrf
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <!-- Name -->
-            <div>
-                <label for="name" class="block text-sm font-medium text-white">Name</label>
-                <input type="text" name="name" id="name" required
-                    class="mt-1 block w-full rounded-md bg-gray-700 border border-gray-600 focus:border-cyan-500 focus:ring-cyan-500 text-white"
-                    value="{{ old('name') }}" />
-            </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <input type="text" name="name" placeholder="Name der Karte" value="{{ old('name') }}"
+                class="w-full px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400" required>
 
-            <!-- Set -->
-            <div>
-                <label for="set" class="block text-sm font-medium text-white">Set</label>
-                <input type="text" name="set" id="set"
-                    class="mt-1 block w-full rounded-md bg-gray-700 border border-gray-600 focus:border-cyan-500 focus:ring-cyan-500 text-white"
-                    value="{{ old('set') }}" />
-            </div>
+            <input type="text" name="set" placeholder="Set (z.B. sv2a)" value="{{ old('set') }}"
+                class="w-full px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400">
 
-            <!-- Set-Nummer -->
-            <div>
-                <label for="set_number" class="block text-sm font-medium text-white">Set-Nummer</label>
-                <input type="text" name="set_number" id="set_number"
-                    class="mt-1 block w-full rounded-md bg-gray-700 border border-gray-600 focus:border-cyan-500 focus:ring-cyan-500 text-white"
-                    value="{{ old('set_number') }}" />
-            </div>
+            <input type="text" name="set_number" placeholder="Set-Nummer (z.B. 201/165)" value="{{ old('set_number') }}"
+                class="w-full px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400">
 
-            <!-- Seltenheit -->
-            <div>
-                <label for="rarity" class="block text-sm font-medium text-white">Seltenheit</label>
-                <select name="rarity" id="rarity" required
-                    class="mt-1 block w-full rounded-md bg-gray-700 border border-gray-600 focus:border-cyan-500 focus:ring-cyan-500 text-white">
-                    <option value="">Wählen…</option>
-                    <option value="AR" {{ old('rarity') == 'AR' ? 'selected' : '' }}>AR</option>
-                    <option value="SR" {{ old('rarity') == 'SR' ? 'selected' : '' }}>SR</option>
-                    <option value="SAR" {{ old('rarity') == 'SAR' ? 'selected' : '' }}>SAR</option>
-                </select>
-            </div>
+            <select name="rarity"
+                class="w-full px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400" required>
+                <option value="">Seltenheit wählen</option>
+                <option value="AR" {{ old('rarity') == 'AR' ? 'selected' : '' }}>AR</option>
+                <option value="SR" {{ old('rarity') == 'SR' ? 'selected' : '' }}>SR</option>
+                <option value="SAR" {{ old('rarity') == 'SAR' ? 'selected' : '' }}>SAR</option>
+            </select>
 
-            <!-- Kartenart -->
-            <div>
-                <label for="card_type" class="block text-sm font-medium text-white">Kartenart</label>
-                <input type="text" name="card_type" id="card_type"
-                    class="mt-1 block w-full rounded-md bg-gray-700 border border-gray-600 focus:border-cyan-500 focus:ring-cyan-500 text-white"
-                    value="{{ old('card_type') }}" />
-            </div>
+            <input type="text" name="card_type" placeholder="Kartenart (z.B. Pokémon, Trainer)" value="{{ old('card_type') }}"
+                class="w-full px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400">
 
-            <!-- Sprache -->
-            <div>
-                <label for="language" class="block text-sm font-medium text-white">Sprache</label>
-                <input type="text" name="language" id="language"
-                    class="mt-1 block w-full rounded-md bg-gray-700 border border-gray-600 focus:border-cyan-500 focus:ring-cyan-500 text-white"
-                    value="{{ old('language', 'JPN') }}" />
-            </div>
+            <input type="text" name="language" placeholder="Sprache (z.B. JPN, DE)" value="{{ old('language', 'JPN') }}"
+                class="w-full px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400">
 
-            <!-- Zustand -->
-            <div>
-                <label for="condition" class="block text-sm font-medium text-white">Zustand</label>
-                <input type="text" name="condition" id="condition"
-                    class="mt-1 block w-full rounded-md bg-gray-700 border border-gray-600 focus:border-cyan-500 focus:ring-cyan-500 text-white"
-                    value="{{ old('condition') }}" />
-            </div>
+            <input type="text" name="condition" placeholder="Zustand (z.B. Mint, Played)" value="{{ old('condition') }}"
+                class="w-full px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400">
 
-            <!-- Preis -->
-            <div>
-                <label for="price" class="block text-sm font-medium text-white">Preis (€)</label>
-                <input type="number" step="0.01" name="price" id="price"
-                    class="mt-1 block w-full rounded-md bg-gray-700 border border-gray-600 focus:border-cyan-500 focus:ring-cyan-500 text-white"
-                    value="{{ old('price') }}" />
-            </div>
+            <input type="number" step="0.01" name="price" placeholder="Preis (€)" value="{{ old('price') }}"
+                class="w-full px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400">
         </div>
 
-        
+        <textarea name="notes" placeholder="Bemerkungen"
+            class="w-full mt-4 px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
+            rows="3">{{ old('notes') }}</textarea>
 
-        <!-- Notizen -->
-        <div>
-            <label for="notes" class="block text-sm font-medium text-white">Bemerkungen</label>
-            <textarea name="notes" id="notes" rows="3"
-                class="mt-1 block w-full rounded-md bg-gray-700 border border-gray-600 focus:border-cyan-500 focus:ring-cyan-500 text-white">{{ old('notes') }}</textarea>
+        {{-- Bild-Upload --}}
+        <div class="mt-4">
+            <label class="block text-white mb-1 font-semibold" for="image">Bild der Karte (JPG, JPEG, PNG)</label>
+            <input type="file" name="image" id="image" accept=".jpg,.jpeg,.png"
+                class="w-full px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400" />
         </div>
 
-         <div class="mb-4">
-        <label for="image" class="block text-sm font-medium text-gray-300">Bild hochladen (optional):</label>
-        <input type="file" name="image" id="image"
-               class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-cyan-500">
-    </div>
-
-    <button type="submit"
-            class="bg-cyan-500 hover:bg-cyan-600 text-white font-semibold px-4 py-2 rounded">
-        Karte speichern
-    </button>
+        <div class="text-right mt-6">
+            <button type="submit"
+                class="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-2 rounded-lg font-semibold shadow-md transition">
+                Karte speichern
+            </button>
         </div>
     </form>
 </div>
